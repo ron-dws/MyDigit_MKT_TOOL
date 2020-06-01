@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import Header from './Header.js';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import '../CSS/Style-main.css';
 
 
@@ -11,6 +13,7 @@ class Register extends Component{
             reg_ln:'',
             reg_email:'',
             reg_phone:'',
+            register_mss:'',
         }
     }
 
@@ -21,8 +24,34 @@ class Register extends Component{
     //Login submited
     Form_submited = (e) => {
       e.preventDefault();
-      this.check_validation(this.state.reg_fn, this.state.reg_ln, this.state.reg_email, this.state.reg_phone);
+      let val_return = this.check_validation(this.state.reg_fn, this.state.reg_ln, this.state.reg_email, this.state.reg_phone);
       const jsonState = JSON.stringify(this.state);
+      const register_url = "http://localhost:8080/April_2020/Omarketing/api/register/registration.php";
+      
+      if(!val_return){
+        console.log("cannot process registration");
+        return
+      }
+      
+      axios.post(register_url, jsonState)
+      .then((res) => {
+        console.log(res.data.message);
+
+         if(res.data.message === "good"){
+          this.setState({
+              reg_fn:'',
+              reg_ln:'',
+              reg_email:'',
+              reg_phone:'',
+              register_mss: "successful registration"
+            });
+          //window.location.assign("/clientslist"); //redirect to the clientslist component
+         }else{
+           this.setState({ register_mss: "not registered" });
+         }
+      })
+      .catch((error) => console.log(error))
+
     }
 
     //check inputs validation
@@ -37,7 +66,9 @@ class Register extends Component{
       val_em.style.display = "none";
       val_ph.style.display = "none";
 
-      const ph_check = ph;
+      let form_validity = false;
+
+      //const ph_check = ph;
 
       if(fn === "" && ln === "" && em === "" && ph === ""){
           val_fn.style.display = "block";
@@ -127,21 +158,24 @@ class Register extends Component{
         setTimeout(()=>{val_em.style.opacity = "1";},200);
 
       }else if(ln === ""){
-          val_ph.style.display = "block";
-          setTimeout(()=>{val_ph.style.opacity = "1";},200);
+          val_ln.style.display = "block";
+          setTimeout(()=>{val_ln.style.opacity = "1";},200);
           
       }else if(em === ""){
         val_em.style.display = "block";
         setTimeout(()=>{val_em.style.opacity = "1";},200);
 
-      }else if(ph === "" || isNaN(ph) || ph.toString().length < 9 || ph.toString().length > 9){
+      }else if(ph === "" || isNaN(ph) || ph.toString().length < 10 || ph.toString().length > 10){
             val_ph.style.display = "block";
             setTimeout(()=>{val_ph.style.opacity = "1";},200);
           
       }else{
         //post login to api
          console.log(JSON.stringify(this.state));
+         form_validity = true;
       }
+
+      return form_validity;
     }
 
     render(){
@@ -149,6 +183,7 @@ class Register extends Component{
      return(
         <div className="home-container">
             <Header />
+            <p className="p-error-mss">{ this.state.register_mss }</p>
             <div id="reg-form" className="login-form">
             <form onSubmit={ this.Form_submited }>
                 
@@ -166,6 +201,11 @@ class Register extends Component{
 
                 <button className="btn-login" type="submit">Register</button> <br/>     
             </form>
+
+            <Link to="/">
+               <button className="btn-login btn-nav" type="button">Home</button>
+            </Link>
+
             </div> 
           </div> 
         )

@@ -5,13 +5,16 @@ import Home from './Views/Home';
 import Login from './Views/Login.js';
 import Register from './Views/Register.js';
 import Modal from './Views/Modal.js';
+import ClientDetail from './Views/ClientDetail.js'
 import ClientsList from './Views/ClientsList.js';
+import Logout from './Views/Logout.js';
+import TestUs from './Views/TestUs.js';
 
 
 class App extends Component {
-  constructor(props){
-    super(props)
-  }
+  // constructor(props){
+  //   super(props)
+  // }
   render(){
         return(
           <BrowserRouter>
@@ -20,6 +23,9 @@ class App extends Component {
             <Route path="/register" component={Register} />
             <Route path="/modal" component={Modal} />
             <Route path="/clientslist" component={ClientsList} />
+            <Route path="/clientdetail/:value" component={ClientDetail} />
+            <Route path="/test/:value" component={TestUs} />
+            <Route path="/logout" component={Logout} />
           </BrowserRouter> 
           );
     }

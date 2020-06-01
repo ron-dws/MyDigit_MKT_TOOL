@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import '../CSS/Style-main.css';
 
 function Header(props){
