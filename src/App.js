@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 import './App.css';
 import Home from './Views/Home';
 import Login from './Views/Login.js';
@@ -17,7 +17,7 @@ class App extends Component {
   // }
   render(){
         return(
-          <BrowserRouter>
+          <HashRouter>
             <Route exact path="/" component={Home} /> 
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
@@ -26,7 +26,7 @@ class App extends Component {
             <Route path="/clientdetail/:value" component={ClientDetail} />
             <Route path="/test/:value" component={TestUs} />
             <Route path="/logout" component={Logout} />
-          </BrowserRouter> 
+          </HashRouter> 
           );
     }
 }
