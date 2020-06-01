@@ -25,7 +25,8 @@ class Login extends Component{
       e.preventDefault();
       let val_return = this.check_validation(this.state.email, this.state.password);
       const jsonState = JSON.stringify(this.state);
-      const login_url = "http://localhost:8080/April_2020/Omarketing/api/login/login.php";
+     // const login_url = "http://localhost:8080/April_2020/Omarketing/api/login/login.php";
+      const login_url = "https://tchounangproject.com/April_2020/Omarketing/api/login/login.php"
 
       //Check if the form validation has passed
       if(!val_return){
@@ -42,7 +43,7 @@ class Login extends Component{
           //success login
           this.setState({log_success: true});
              //Cookie to validate login status
-          window.location.assign("/clientslist"); //redirect to the clientslist component
+          window.location.assign("#/clientslist"); //redirect to the clientslist component
          }else{
            this.setState({ wrong_log: '* Your credential did not match' });
          }
