@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/MyDigit_MKT_TOOL/static/css/main.a7207554.chunk.css",
-    "main.js": "/MyDigit_MKT_TOOL/static/js/main.81a9a8fa.chunk.js",
-    "main.js.map": "/MyDigit_MKT_TOOL/static/js/main.81a9a8fa.chunk.js.map",
+    "main.js": "/MyDigit_MKT_TOOL/static/js/main.cf31cc31.chunk.js",
+    "main.js.map": "/MyDigit_MKT_TOOL/static/js/main.cf31cc31.chunk.js.map",
     "runtime-main.js": "/MyDigit_MKT_TOOL/static/js/runtime-main.0f585386.js",
     "runtime-main.js.map": "/MyDigit_MKT_TOOL/static/js/runtime-main.0f585386.js.map",
     "static/js/2.5b1eb493.chunk.js": "/MyDigit_MKT_TOOL/static/js/2.5b1eb493.chunk.js",
     "static/js/2.5b1eb493.chunk.js.map": "/MyDigit_MKT_TOOL/static/js/2.5b1eb493.chunk.js.map",
     "index.html": "/MyDigit_MKT_TOOL/index.html",
-    "precache-manifest.f56c8c5c73ab46d7448b0a126e5c311b.js": "/MyDigit_MKT_TOOL/precache-manifest.f56c8c5c73ab46d7448b0a126e5c311b.js",
+    "precache-manifest.07ab40244a767b897f18c20cf5756330.js": "/MyDigit_MKT_TOOL/precache-manifest.07ab40244a767b897f18c20cf5756330.js",
     "service-worker.js": "/MyDigit_MKT_TOOL/service-worker.js",
     "static/css/main.a7207554.chunk.css.map": "/MyDigit_MKT_TOOL/static/css/main.a7207554.chunk.css.map",
     "static/js/2.5b1eb493.chunk.js.LICENSE.txt": "/MyDigit_MKT_TOOL/static/js/2.5b1eb493.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.0f585386.js",
     "static/js/2.5b1eb493.chunk.js",
     "static/css/main.a7207554.chunk.css",
-    "static/js/main.81a9a8fa.chunk.js"
+    "static/js/main.cf31cc31.chunk.js"
   ]
 }
