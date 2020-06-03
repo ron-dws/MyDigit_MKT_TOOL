@@ -17,12 +17,16 @@ class ClientsList extends Component{
         }
     }
 
+    //Authenticate -> check if login, if not redirect to login
+  
 
     //Retrieve customers info from the end points when the component load
     componentDidMount = () => { this.getCustInfo(); }
     getCustInfo = () =>{
         //use fetch to point to end point end get custs info
-        const custs_url = "http://localhost:8080/April_2020/Omarketing/api/customers/read.php";
+        //const custs_url = "http://localhost:8080/April_2020/Omarketing/api/customers/read.php";
+        const custs_url = "https://tchounangproject.com/April_2020/Omarketing/api/customers/read.php";
+
         axios.get(custs_url)
         .then((res)=>{
            const data_custs = res.data;
@@ -59,10 +63,14 @@ class ClientsList extends Component{
     sendMessage = (e)=>{
      e.preventDefault();
     
-    const cust_list_api_url = "http://localhost:8080/April_2020/Omarketing/api/messages/message.php";
-    const api_send_message =  "http://localhost:8080/April_2020/Omarketing/api/send-sms_update.php";
+    //const cust_list_api_url = "http://localhost:8080/April_2020/Omarketing/api/messages/message.php";
+    //const api_send_message =  "http://localhost:8080/April_2020/Omarketing/api/send-sms_update.php";
+
+    const cust_list_api_url = "https://tchounangproject.com//April_2020/Omarketing/api/messages/message.php";
+    const api_send_message =  "https://tchounangproject.com//April_2020/Omarketing/api/send-sms_update.php";
+
     //const original_url = ""; //own url so customer can rate
-   //const from_share_url = ""; //if own entered an url
+    //const from_share_url = ""; //if own entered an url
     let jsm = {};
     let share_url_to_use ="";
     let custom_mss_to_use ="";
@@ -187,8 +195,9 @@ class ClientsList extends Component{
         
         const {share_url, custom_mss} = this.state;
         return(
+           <div className="animate-bottom"> 
             <div className="home-container">
-              <Modal />
+              {/* <Modal /> */}
               <Header/>
               <p>{this.state.mss_response}</p>
               <input type="text" name="share_url" className="input-form" onChange={ this.mss_val_changed } value={ share_url } placeholder="share url" />
@@ -201,6 +210,7 @@ class ClientsList extends Component{
                 <button className="btn-login btn-logout" type="button">Log out</button>
               </Link>
             </div>
+          </div>  
         );
     }
 }

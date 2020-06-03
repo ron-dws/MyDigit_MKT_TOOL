@@ -16,6 +16,8 @@ class Login extends Component{
         }
     }
 
+    //Check if already login, if so redirect to clientlist
+
     Value_has_changed = (e) =>{
       this.setState({[e.target.name]: e.target.value})
     }
@@ -97,28 +99,30 @@ class Login extends Component{
         log_status = "no";
         }
      return(
+      <div className="animate-bottom">
         <div className="home-container">
-         <Header />
-         <p>Login Status: {log_status}</p>
-         <p className="p-error-mss">{ this.state.wrong_log }</p>
-         <div id="reg-form" className="login-form">
-           
-          <form onSubmit={ this.Form_submited }>
+          <Header />
+          <p>Login Status: {log_status}</p>
+          <p className="p-error-mss">{ this.state.wrong_log }</p>
+          <div id="reg-form" className="login-form">
             
-            <input id="em" className="input-form" type="text" name="email"    onChange={this.Value_has_changed} value={ email }    placeholder="Enter your email" /><br/>
-            <div id="validate_log_email"><span>* please enter your email</span></div>
+            <form onSubmit={ this.Form_submited }>
+              
+              <input id="em" className="input-form" type="text" name="email"    onChange={this.Value_has_changed} value={ email }    placeholder="Enter your email" /><br/>
+              <div id="validate_log_email"><span>* please enter your email</span></div>
+              
+              <input id="ps" className="input-form" type="password" name="password" onChange={this.Value_has_changed} value={ password } placeholder="Enter your Password" /><br/>
+              <div id="validate_log_pass"><span>* please enter your password</span></div>
+              <button className="btn-login" type="submit">Log In</button>    
+            </form>
             
-            <input id="ps" className="input-form" type="password" name="password" onChange={this.Value_has_changed} value={ password } placeholder="Enter your Password" /><br/>
-            <div id="validate_log_pass"><span>* please enter your password</span></div>
-            <button className="btn-login" type="submit">Log In</button>    
-          </form>
-          
-          <Link to="/">
-             <button className="btn-login btn-nav" type="button">Home</button>
-          </Link>
-            
-         </div>
-        </div>  
+            <Link to="/">
+              <button className="btn-login btn-nav" type="button">Home</button>
+            </Link>
+              
+           </div>
+          </div>  
+        </div>
         )
     }
 }

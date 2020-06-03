@@ -15,7 +15,8 @@ class Home extends Component{
     
     render(){
      return(
-        <div className="home-container">
+       <div className="animate-bottom">
+         <div className="home-container">
            <Header />
            <Link to="/register">
              <button className="btn-register" name="ordre">Resgister</button>
@@ -24,8 +25,7 @@ class Home extends Component{
              <button className="btn-login">Log In</button>
            </Link>        
         </div>
-          
-         
+       </div>
         );
     }
 }

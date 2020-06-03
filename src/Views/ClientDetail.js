@@ -15,6 +15,8 @@ class ClientDetail extends Component {
            }
     }
 
+    /*Authenticate -> check if login, if not redirect to login
+                   -> if yes continue*/
     componentDidMount = () => { this.getCustDetail() }
 
     //get cust detail info
@@ -22,7 +24,9 @@ class ClientDetail extends Component {
         //use fetch to point to end point end get custs info
         const custId = this.props.match.params.value;
         //let tosend = JSON.stringify({"custid":custId});
-        const cust_detail_url = "http://localhost:8080/April_2020/Omarketing/api/customers/readSingle.php";
+        //const cust_detail_url = "http://localhost:8080/April_2020/Omarketing/api/customers/readSingle.php";
+        const cust_detail_url = "https://tchounangproject.com/April_2020/Omarketing/api/customers/readSingle.php";
+        
         axios.get(cust_detail_url, {
             params: {
                 id: custId
@@ -59,6 +63,7 @@ class ClientDetail extends Component {
 
     render(){
     return(
+      <div className="animate-bottom">
         <div className="home-container">
           <Header />
               <ul className="ul-cust-detail">
@@ -77,6 +82,7 @@ class ClientDetail extends Component {
                 <button className="btn-login btn-logout" type="button">Log out</button>
               </Link>
          </div>
+        </div> 
         
     );
   }

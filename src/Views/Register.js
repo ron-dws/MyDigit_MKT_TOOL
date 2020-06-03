@@ -26,7 +26,8 @@ class Register extends Component{
       e.preventDefault();
       let val_return = this.check_validation(this.state.reg_fn, this.state.reg_ln, this.state.reg_email, this.state.reg_phone);
       const jsonState = JSON.stringify(this.state);
-      const register_url = "http://localhost:8080/April_2020/Omarketing/api/register/registration.php";
+      //const register_url = "http://localhost:8080/April_2020/Omarketing/api/register/registration.php";
+      const register_url = "https://tchounangproject.com//April_2020/Omarketing/api/register/registration.php";
       
       if(!val_return){
         console.log("cannot process registration");
@@ -36,18 +37,21 @@ class Register extends Component{
       axios.post(register_url, jsonState)
       .then((res) => {
         console.log(res.data.message);
+         let log_api_response = String(res.data.message);
+         let trim_log_api_response = log_api_response.trim();
+         alert(trim_log_api_response);
 
-         if(res.data.message === "good"){
+         if(trim_log_api_response === "good"){
           this.setState({
               reg_fn:'',
               reg_ln:'',
               reg_email:'',
               reg_phone:'',
-              register_mss: "successful registration"
+              register_mss: "Successful registration"
             });
           //window.location.assign("/clientslist"); //redirect to the clientslist component
          }else{
-           this.setState({ register_mss: "not registered" });
+           this.setState({ register_mss: "Not registered" });
          }
       })
       .catch((error) => console.log(error))
@@ -181,6 +185,7 @@ class Register extends Component{
     render(){
       const {reg_fn, reg_ln, reg_email, reg_phone } = this.state;
      return(
+      <div className="animate-bottom">
         <div className="home-container">
             <Header />
             <p className="p-error-mss">{ this.state.register_mss }</p>
@@ -208,6 +213,7 @@ class Register extends Component{
 
             </div> 
           </div> 
+         </div> 
         )
     }
 }
