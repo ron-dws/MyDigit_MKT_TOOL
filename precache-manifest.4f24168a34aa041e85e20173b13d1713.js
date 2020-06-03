@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7e0494f630249d974f295d7f501bf117",
+    "revision": "4e56b85a87416d5fa1330f0c5b9ccade",
     "url": "/MyDigit_MKT_TOOL/index.html"
   },
   {
-    "revision": "85e9e8c50c527359dea1",
-    "url": "/MyDigit_MKT_TOOL/static/css/main.8000179b.chunk.css"
+    "revision": "dba27faa6860b13952e6",
+    "url": "/MyDigit_MKT_TOOL/static/css/main.49a8bb9c.chunk.css"
   },
   {
     "revision": "95ae6ea8b63f83ac1251",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/MyDigit_MKT_TOOL/static/js/2.2a24b8ac.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "85e9e8c50c527359dea1",
+    "revision": "dba27faa6860b13952e6",
     "url": "/MyDigit_MKT_TOOL/static/js/main.76b44a16.chunk.js"
   },
   {

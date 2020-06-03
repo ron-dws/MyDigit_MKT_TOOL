@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/MyDigit_MKT_TOOL/static/css/main.8000179b.chunk.css",
+    "main.css": "/MyDigit_MKT_TOOL/static/css/main.49a8bb9c.chunk.css",
     "main.js": "/MyDigit_MKT_TOOL/static/js/main.76b44a16.chunk.js",
     "main.js.map": "/MyDigit_MKT_TOOL/static/js/main.76b44a16.chunk.js.map",
     "runtime-main.js": "/MyDigit_MKT_TOOL/static/js/runtime-main.0f585386.js",
@@ -8,15 +8,15 @@
     "static/js/2.2a24b8ac.chunk.js": "/MyDigit_MKT_TOOL/static/js/2.2a24b8ac.chunk.js",
     "static/js/2.2a24b8ac.chunk.js.map": "/MyDigit_MKT_TOOL/static/js/2.2a24b8ac.chunk.js.map",
     "index.html": "/MyDigit_MKT_TOOL/index.html",
-    "precache-manifest.1b8a006651f6f38c85f84a64c689cc55.js": "/MyDigit_MKT_TOOL/precache-manifest.1b8a006651f6f38c85f84a64c689cc55.js",
+    "precache-manifest.4f24168a34aa041e85e20173b13d1713.js": "/MyDigit_MKT_TOOL/precache-manifest.4f24168a34aa041e85e20173b13d1713.js",
     "service-worker.js": "/MyDigit_MKT_TOOL/service-worker.js",
-    "static/css/main.8000179b.chunk.css.map": "/MyDigit_MKT_TOOL/static/css/main.8000179b.chunk.css.map",
+    "static/css/main.49a8bb9c.chunk.css.map": "/MyDigit_MKT_TOOL/static/css/main.49a8bb9c.chunk.css.map",
     "static/js/2.2a24b8ac.chunk.js.LICENSE.txt": "/MyDigit_MKT_TOOL/static/js/2.2a24b8ac.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.0f585386.js",
     "static/js/2.2a24b8ac.chunk.js",
-    "static/css/main.8000179b.chunk.css",
+    "static/css/main.49a8bb9c.chunk.css",
     "static/js/main.76b44a16.chunk.js"
   ]
 }
