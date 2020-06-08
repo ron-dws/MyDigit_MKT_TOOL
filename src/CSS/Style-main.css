@@ -96,6 +96,8 @@ input[type="text"].input-form:focus, input[type="password"]:focus, textarea:focu
    color: red;
    font-weight: bold;
    padding-top: 5px;
+   margin-bottom: 5px;
+   transition: 1s ease;
 }
 
 /* cust detail */
@@ -109,6 +111,11 @@ input[type="text"].input-form:focus, input[type="password"]:focus, textarea:focu
 }
 .btn-cust-detail{
     margin-top: 0;
+}
+
+.span-cust-detail{
+    font-size: 1rem;
+    color: rgba(249, 204, 0, 0.96);
 }
 /* cust display list */
 .cust-info-block{
@@ -186,6 +193,12 @@ input[type=checkbox]:before {
     border-radius: 50px;
     transition: .4s ease;
     background-color: rgba(255, 255, 255, 0.99);
+}
+input.cust_checkbox_mss[type=checkbox]{
+    top:0;
+  }
+input.cust_checkbox_mss[type=checkbox]:before{
+  background: red;
 }
 input[type=checkbox]:checked:before {
     content: "";

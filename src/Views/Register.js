@@ -39,7 +39,7 @@ class Register extends Component{
         console.log(res.data.message);
          let log_api_response = String(res.data.message);
          let trim_log_api_response = log_api_response.trim();
-         alert(trim_log_api_response);
+         //alert(trim_log_api_response);
 
          if(trim_log_api_response === "good"){
           this.setState({
@@ -49,6 +49,14 @@ class Register extends Component{
               reg_phone:'',
               register_mss: "Successful registration"
             });
+          //display message only for 3 seconds
+          const display_reg_mss = document.getElementById("p-mss-display");
+          display_reg_mss.style.color = "green";
+          display_reg_mss.style.transition = "1s ease";
+          display_reg_mss.style.display = "block";
+          setTimeout(()=>{
+            display_reg_mss.style.display = "none";
+          },3000);
           //window.location.assign("/clientslist"); //redirect to the clientslist component
          }else{
            this.setState({ register_mss: "Not registered" });
@@ -188,7 +196,7 @@ class Register extends Component{
       <div className="animate-bottom">
         <div className="home-container">
             <Header />
-            <p className="p-error-mss">{ this.state.register_mss }</p>
+            <p id="p-mss-display" className="p-error-mss">{ this.state.register_mss }</p>
             <div id="reg-form" className="login-form">
             <form onSubmit={ this.Form_submited }>
                 

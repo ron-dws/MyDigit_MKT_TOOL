@@ -85,15 +85,14 @@ class Login extends Component{
 
          form_validity = true;
       }
-
       return form_validity;
     }
 
     render(){
       const {email, password } = this.state;
 
-          let log_status = '';
-          if(this.state.log_success){
+        let log_status = '';
+        if(this.state.log_success){
             log_status = "yes";
         }else{
         log_status = "no";

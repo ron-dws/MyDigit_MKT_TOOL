@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Modal from './Modal.js';
+//import Modal from './Modal.js';
 import Header from './Header.js';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -21,7 +21,25 @@ class ClientsList extends Component{
   
 
     //Retrieve customers info from the end points when the component load
-    componentDidMount = () => { this.getCustInfo(); }
+    componentDidMount = () => { this.getCustInfo();}
+    trackChange = ()=>{
+        const url_send_or_notnot = document.querySelector(".cust_checkbox_mss");
+        const inp_share_url = document.getElementById("inp_share_url");
+        if(url_send_or_notnot.checked){
+            //make share_url input not usable
+            inp_share_url.style.transition = "2s ease";
+            inp_share_url.style.display = "none";
+            //inp_share_url.style.border = "2px solid red";
+
+        }else{
+            //const inp_share_url = document.getElementById("inp_share_url");
+            //inp_share_url.readOnly = true;
+            //inp_share_url.style.border = "1px solid lightgray;";
+
+            inp_share_url.style.transition = "2s ease";
+            inp_share_url.style.display = "block";
+        }    
+    }
     getCustInfo = () =>{
         //use fetch to point to end point end get custs info
         //const custs_url = "http://localhost:8080/April_2020/Omarketing/api/customers/read.php";
@@ -62,6 +80,7 @@ class ClientsList extends Component{
     //Send Message
     sendMessage = (e)=>{
      e.preventDefault();
+     console.log("mami");
     
     //const cust_list_api_url = "http://localhost:8080/April_2020/Omarketing/api/messages/message.php";
     //const api_send_message =  "http://localhost:8080/April_2020/Omarketing/api/send-sms_update.php";
@@ -99,22 +118,6 @@ class ClientsList extends Component{
     const obj_chck_checked = {
         'allcusts_ids': chck_checked_string
        }
-        
-        //post message
-        // postMss = (js, ch) => {
-        //     //let merge_obj = {...js, ...ch}
-        //     const merge_obj = Object.assign(js, ch);
-        //     axios.post(cust_list_api_url, JSON.stringify(merge_obj))
-        //     .then((res) =>{
-        //         //console.log(res.data.message)
-        //         const mssResponse = res.data.message;
-        //         this.setState({ mss_response: mssResponse });
-        //         console.log(this.state.mss_response);
-        //     })
-        //     .catch((er) => console.log(er))
-        // }
-
-        
 
         //Check inputs to decide what to send
         if(this.state.share_url === "" && this.state.custom_mss === ""){
@@ -151,39 +154,80 @@ class ClientsList extends Component{
             } 
         }
 
-        
-
-        //Call function to send message (POST) to end point
-        //postMss(jsm, obj_chck_checked);
+    
 
         //post message
         let postMss = (js, ch) => {
-            //let merge_obj = {...js, ...ch}
             const merge_obj = Object.assign(js, ch);
+            
             //to save the message
             axios.post(cust_list_api_url, JSON.stringify(merge_obj))
             .then((res) =>{
                    console.log(res.data.message);
-                // const mssResponse = res.data.message;
-                // this.setState({ mss_response: mssResponse });
-                // console.log(this.state.mss_response);
             })
             .catch((er) => console.log(er))
 
             //to send the message
             axios.post(api_send_message, JSON.stringify(merge_obj))
             .then((res) =>{
-                    console.log(res.data);
-                    let mssResponse = res.data.message;
-                    this.setState({ mss_response: mssResponse });
-                    console.log(this.state.mss_response);
+                console.log(res.data);
+                let log_api_response = String(res.data.message);
+                let trim_log_api_response = log_api_response.trim();
+                //alert(trim_log_api_response);
+
+                if(trim_log_api_response === "good"){
+                this.setState({
+                    mss_response: "Message sent successfuly"
+                    });
+                    //display message only for 3 seconds
+                    const display_reg_mss = document.getElementById("p-mss-display");
+                    display_reg_mss.style.color = "green";
+                    display_reg_mss.style.transition = "1s ease";
+                    display_reg_mss.style.display = "block";
+                    setTimeout(()=>{
+                        display_reg_mss.style.display = "none";
+                    },3000);
+                    //window.location.assign("/clientslist"); //redirect to the clientslist component
+                    }else{
+                    this.setState({ mss_response: "Couldn't send the message" });
+                    }
             })
             .catch((er) => console.log(er))
         }
 
-        //Call function to send message (POST) to end point
-        postMss(jsm, obj_chck_checked);
+        //Check if owner wants to send the url with the message
+        const url_send_or_not = document.querySelector(".cust_checkbox_mss");
+        let url_send_or_not_value = "";
+
+        if(url_send_or_not.checked){
+            url_send_or_not_value = "YES";
+            this.setState({ share_url: "" })
+            share_url_to_use = "";
+
+            //Check if the owner entered a message
+            if(this.state.custom_mss === ""){
+             this.setState({ custom_mss: "We appreciate your business with us. please click here to rate us" }); 
+             custom_mss_to_use = "We appreciate your business with us. please click here to rate us";
+              jsm = {
+                'share_url': share_url_to_use,
+                'custom_mss': custom_mss_to_use,
+             }
+            }else{
+              jsm = {
+                'share_url': share_url_to_use,
+                'custom_mss': this.state.custom_mss,
+                }
+            }
+            //Call function to send message (POST) to end point
+            postMss(jsm, obj_chck_checked);
+
+        }else{
+
+            url_send_or_not_value = "NO";
+            postMss(jsm, obj_chck_checked);
+        }
         
+        console.log(url_send_or_not_value);   
     }
 
     //set new value(s) entered by the user
@@ -199,8 +243,12 @@ class ClientsList extends Component{
             <div className="home-container">
               {/* <Modal /> */}
               <Header/>
-              <p>{this.state.mss_response}</p>
-              <input type="text" name="share_url" className="input-form" onChange={ this.mss_val_changed } value={ share_url } placeholder="share url" />
+              <p id="p-mss-display" className="p-error-mss">{ this.state.mss_response }</p>
+              <p>
+              <input type="checkbox" onChange={this.trackChange} className="cust_checkbox_mss" name="url_send_or_not_checked" value="nosend" /> 
+              <span>&nbsp; &nbsp;Do not send Url</span>
+              </p>           
+              <input type="text" id="inp_share_url" name="share_url" className="input-form" onChange={ this.mss_val_changed } value={ share_url } placeholder="share url" />
               <textarea name="custom_mss" className="" onChange={ this.mss_val_changed } value={ custom_mss} placeholder="your message"/>
               <div id="style-3" className="cust-info-block" >
                   {this.displayCustsInfo(this.state.custs_data_fr_api)}

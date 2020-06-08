@@ -5,7 +5,7 @@ const ProtectedLogin = ({auth, component:Component, ...rest}) => {
     return(
       <Route 
         {...rest}
-        render = {() => auth? (<Redirect to="/vdashboard" />):(<Component />)}
+        render = {() => auth? (<Redirect to="/vdashboard" />):(<Component />)} 
       />
     )
 }

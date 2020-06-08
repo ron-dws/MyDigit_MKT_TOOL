@@ -8,6 +8,6 @@ const ProtectedRoute = ({auth, component:Component, ...rest}) => {
           render = { ()=>auth? (<Component/>):(<Redirect to="/vlogin" />) }
         />
     )
-}
+} 
 
 export default ProtectedRoute;
