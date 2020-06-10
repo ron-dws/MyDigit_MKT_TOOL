@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/MyDigit_MKT_TOOL/precache-manifest.c0b312ea94442f39e962d95fd569acfd.js"
+  "/MyDigit_MKT_TOOL/precache-manifest.98300ac46da051e4c5279a02a01c2bea.js"
 );
 
 self.addEventListener('message', (event) => {
