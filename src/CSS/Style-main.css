@@ -117,6 +117,24 @@ input[type="text"].input-form:focus, input[type="password"]:focus, textarea:focu
     font-size: 1rem;
     color: rgba(249, 204, 0, 0.96);
 }
+
+#btnSend{
+    border: 1px solid rgba(0, 22, 104, 0.95);
+    border-radius: 20px;
+    background-color: rgba(0, 22, 104, 0.95);
+    padding: 10px;
+    cursor: pointer;
+    color: white;
+}
+
+#btnCancel{
+    border-radius: 50%;
+    padding: 8px;
+    border: 1px solid red;
+    background: red;
+    cursor: pointer;
+    color: white;
+}
 /* cust display list */
 .cust-info-block{
     height: 200px;
@@ -153,6 +171,11 @@ ul{
     border-radius: 7px;
     background-color: #001668;
 }
+
+ul#ul_send_update{
+    background: transparent;    
+}
+
 li{
     padding: 10px;
     font-size: 20px;

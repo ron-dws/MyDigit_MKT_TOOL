@@ -39,7 +39,7 @@ class Login extends Component{
       //send data to endpoint
       axios.post(login_url, jsonState)
       .then((res)=>{ 
-         console.log(res.data.login);
+         console.log(res.data);
 
          if(res.data.login === "good"){
           //success login

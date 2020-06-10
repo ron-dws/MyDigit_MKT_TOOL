@@ -11,7 +11,8 @@ class ClientDetail extends Component {
            this.state = {
                custId:"",
                err_mess:"",
-               cust_data_fr_api:{ firstName:"", lastName:"", email:"",},
+               response_mss:"",
+               cust_data_fr_api:{ firstName:"first name", lastName:"last name", email:"email", phoneNumber:"phone number"},
            }
     }
 
@@ -21,6 +22,19 @@ class ClientDetail extends Component {
 
     //get cust detail info
     getCustDetail = () =>{
+        //hide all inputs
+        const new_fn = document.getElementById("fn");
+        const new_ln = document.getElementById("ln");
+        const new_phone = document.getElementById("ph");
+        const new_email = document.getElementById("em");
+        const ul_send = document.getElementById("ul_send_update");
+
+        new_fn.style.display = "none";
+        new_ln.style.display = "none";
+        new_phone.style.display = "none";
+        new_email.style.display = "none";
+        ul_send.style.display = "none";
+
         //Point to api and retrieve the customer info
         const custId = this.props.match.params.value;
         //const cust_detail_url = "http://localhost:8080/April_2020/Omarketing/api/customers/readSingle.php";
@@ -42,15 +56,69 @@ class ClientDetail extends Component {
     }
 
     Value_has_changed = (e) =>{
-      //const x = document.getElementById("em").value;
-      // this.setState({...this.state.cust_data_fr_api, firstName: e.target.value});
-      this.setState(Object.assign(this.state.cust_data_fr_api, {firstName: e.currentTarget.value}));
-      console.log(this.state.cust_data_fr_api.firstName);
+      const new_fn = document.getElementById("fn").value;
+      const new_ln = document.getElementById("ln").value;
+      const new_phone = document.getElementById("ph").value;
+      const new_email = document.getElementById("em").value;
+      this.setState(Object.assign(this.state.cust_data_fr_api, {firstName: new_fn, lastName: new_ln, email: new_email, phoneNumber: new_phone}));
+     // console.log(this.state.cust_data_fr_api);
     }
 
     //Update the customer info
     Update_cust = () => {
-      const upd= document.getElementById("btnUpdate").value;
+        const new_fn = document.getElementById("fn");
+        const new_ln = document.getElementById("ln");
+        const new_phone = document.getElementById("ph");
+        const new_email = document.getElementById("em");
+        const ul_send = document.getElementById("ul_send_update");
+
+        new_fn.style.display = "block";
+        new_ln.style.display = "block";
+        new_phone.style.display = "block";
+        new_email.style.display = "block";
+        ul_send.style.display = "flex";
+    }
+
+    Send_new_cust_info = () => {
+      const jsonState = JSON.stringify(this.state.cust_data_fr_api);
+      console.log(jsonState);
+
+      //Send updated customer info to API
+      const update_url = "https://tchounangproject.com//April_2020/Omarketing/api/customers/updateCustInfo.php";
+      axios.put(update_url, jsonState)
+      .then((res)=>{
+        const response = res.data.message;
+        console.log(response);
+
+        if(response === "good"){
+          this.setState({response_mss: "Customer Info Updated"});
+          
+          //display message only for 3 seconds
+          const display_update_mss = document.getElementById("p-mss-display");
+          display_update_mss.style.color = "green";
+          display_update_mss.style.transition = "1s ease";
+          display_update_mss.style.display = "block";
+          setTimeout(()=>{
+            display_update_mss.style.display = "none";
+          },3000);
+
+          //refresh the component
+          setTimeout(()=>{
+            window.location.reload(true);
+          },3500)
+         }else{
+           this.setState({ response_mss: "Info not updated" });
+         }
+
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+
+    }
+
+    Cancel_send_cust_info = () => {  
+      this.getCustDetail();
     }
 
     //delete the customer info
@@ -62,7 +130,7 @@ class ClientDetail extends Component {
     render(){
       //const { firstName } = this.state;
      // const fn = this.state.cust_data_fr_api.firstName;
-     const { cust_data_fr_api:{ firstName } } = this.state;
+     const { cust_data_fr_api:{ firstName, lastName, email, phoneNumber } } = this.state;
      console.log(this.state.cust_data_fr_api.firstName);
 
      //<input id="em" className="li-cust-detail" type="text" name="cust_data_fr_api" onChange={ this.Value_has_changed } value={ firstName } />
@@ -70,26 +138,37 @@ class ClientDetail extends Component {
       <div className="animate-bottom">
         <div className="home-container">
           <Header />
+          <p id="p-mss-display" className="p-error-mss">{ this.state.response_mss }</p>
               <ul className="ul-cust-detail">
                  <li className="li-cust-detail">
                     First Name: <br/>
                    <span className="span-cust-detail">{this.state.cust_data_fr_api.firstName}</span><br/>
-                   <input id="em" className="li-cust-detail" type="text" name="firstName" onChange={ this.Value_has_changed } value={ this.state.cust_data_fr_api.firstName } />
+                   <input id="fn" className="li-cust-detail" type="text" name="firstName" onChange={ this.Value_has_changed } value={ this.state.cust_data_fr_api.firstName } />
                  </li> 
                  <li className="li-cust-detail">
-                   Last Name: <br/> 
-                   <span className="span-cust-detail">{this.state.cust_data_fr_api.lastName}</span>
+                   Last Name: <br/>
+                   <span className="span-cust-detail">{this.state.cust_data_fr_api.lastName}</span><br/>
+                   <input id="ln" className="li-cust-detail" type="text" name="lastName" onChange={ this.Value_has_changed } value={ this.state.cust_data_fr_api.lastName } />
                  </li>
                  <li className="li-cust-detail">
                    Email: <br/>
-                   <span className="span-cust-detail">{this.state.cust_data_fr_api.email}</span>
+                   <span className="span-cust-detail">{this.state.cust_data_fr_api.email}</span><br/>
+                   <input id="em" className="li-cust-detail" type="text" name="email" onChange={ this.Value_has_changed } value={ this.state.cust_data_fr_api.email } />
                  </li>
                  <li className="li-cust-detail">
                    Phone: <br/>
-                   <span className="span-cust-detail">{this.state.cust_data_fr_api.phoneNumber}</span>
+                   <span className="span-cust-detail">{this.state.cust_data_fr_api.phoneNumber}</span><br/>
+                   <input id="ph" className="li-cust-detail" type="text" name="phoneNumber" onChange={ this.Value_has_changed } value={ this.state.cust_data_fr_api.phoneNumber } />
                  </li>
               </ul>
-
+              <ul id="ul_send_update">
+                <li>
+                  <button id="btnSend" className=" " type="button" onClick={ this.Send_new_cust_info } value={this.state.cust_data_fr_api.id}>Send</button>
+                </li>
+                <li>
+                  <button id="btnCancel" className="" type="button" onClick={ this.Cancel_send_cust_info }>X</button>
+                </li>
+              </ul>
               <Link to="/clientslist">
                 <button className="btn-login" type="button">Clients list</button>
               </Link>
