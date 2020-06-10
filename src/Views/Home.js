@@ -19,7 +19,7 @@ class Home extends Component{
          <div className="home-container">
            <Header />
            <Link to="/register">
-             <button className="btn-register" name="ordre">Resgister</button>
+             <button className="btn-register" name="ordre">Register</button>
            </Link>
            <Link to="/login">
              <button className="btn-login">Log In</button>

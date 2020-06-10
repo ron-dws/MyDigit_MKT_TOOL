@@ -23,19 +23,13 @@ class ClientsList extends Component{
     //Retrieve customers info from the end points when the component load
     componentDidMount = () => { this.getCustInfo();}
     trackChange = ()=>{
-        const url_send_or_notnot = document.querySelector(".cust_checkbox_mss");
+        const url_send_or_not1 = document.querySelector(".cust_checkbox_mss");
         const inp_share_url = document.getElementById("inp_share_url");
-        if(url_send_or_notnot.checked){
+        if(url_send_or_not1.checked){
             //make share_url input not usable
             inp_share_url.style.transition = "2s ease";
             inp_share_url.style.display = "none";
-            //inp_share_url.style.border = "2px solid red";
-
         }else{
-            //const inp_share_url = document.getElementById("inp_share_url");
-            //inp_share_url.readOnly = true;
-            //inp_share_url.style.border = "1px solid lightgray;";
-
             inp_share_url.style.transition = "2s ease";
             inp_share_url.style.display = "block";
         }    
@@ -82,19 +76,19 @@ class ClientsList extends Component{
      e.preventDefault();
      console.log("mami");
     
+    const cust_list_api_url = "https://tchounangproject.com/April_2020/Omarketing/api/messages/message.php";
+    const api_send_message =  "https://tchounangproject.com/April_2020/Omarketing/api/send-sms_update.php";
     //const cust_list_api_url = "http://localhost:8080/April_2020/Omarketing/api/messages/message.php";
     //const api_send_message =  "http://localhost:8080/April_2020/Omarketing/api/send-sms_update.php";
 
-    const cust_list_api_url = "https://tchounangproject.com//April_2020/Omarketing/api/messages/message.php";
-    const api_send_message =  "https://tchounangproject.com//April_2020/Omarketing/api/send-sms_update.php";
+    //default url and message to share
+    const default_business_url = "https://search.google.com/local/writereview?placeid=ChIJsZV77RxjOIgRPhM22X-3JWw";
+    const default_message = "We appreciate your business with us. please click here to rate us";
 
-    //const original_url = ""; //own url so customer can rate
-    //const from_share_url = ""; //if own entered an url
     let jsm = {};
     let share_url_to_use ="";
     let custom_mss_to_use ="";
     
-
     //Get all values of all checkboxes checked
     let all_checkboxes = document.getElementsByName("cust_checked");
     let chck_checked = []; //array to hold values of all the checked ones
@@ -107,25 +101,25 @@ class ClientsList extends Component{
 
     //Check if at least one client was selected
     if(!(chck_checked.length > 0) || chck_checked.length > 1){ 
-        alert ("Select only one customer "+ chck_checked.length); 
+        alert ("Select only one customer -> "+ chck_checked.length + " selected "); 
         return;
      }
 
     //transform chk_checked array in a string
-    let chck_checked_string = chck_checked.join(",");
+    let chck_checked_string = chck_checked.join("-"); // e.g "4,8998989-5,989898-1,89898989"
 
     //pass the string values to a javascript object   
     const obj_chck_checked = {
-        'allcusts_ids': chck_checked_string
+        'allcusts_ids': chck_checked_string // e.g "allcusts_ids":"4,8998989-5,989898-1,89898989"
        }
 
         //Check inputs to decide what to send
         if(this.state.share_url === "" && this.state.custom_mss === ""){
-            this.setState({ share_url: "www.myBu.com" });
-            this.setState({ custom_mss: "We appreciate your business with us. please click here to rate us" });
+            this.setState({ share_url: default_business_url  });
+            this.setState({ custom_mss: default_message });
 
-            share_url_to_use = "www.myBu.com";
-            custom_mss_to_use = "We appreciate your business with us. Please click here to rate us";
+            share_url_to_use = default_business_url;
+            custom_mss_to_use = default_message;
             
             jsm = {
                 'share_url': share_url_to_use,
@@ -140,9 +134,9 @@ class ClientsList extends Component{
                 'custom_mss': this.state.custom_mss,
             } 
         }else if(this.state.share_url !== "" && this.state.custom_mss === ""){ 
-            this.setState({ custom_mss: "We appreciate your business with us. please click here to rate us" }); 
+            this.setState({ custom_mss: default_message }); 
 
-            custom_mss_to_use = "We appreciate your business with us. please click here to rate us";
+            custom_mss_to_use = default_message;
             jsm = {
                 'share_url': this.state.share_url,
                 'custom_mss': custom_mss_to_use,
@@ -153,8 +147,6 @@ class ClientsList extends Component{
                 'custom_mss': this.state.custom_mss
             } 
         }
-
-    
 
         //post message
         let postMss = (js, ch) => {
@@ -168,6 +160,11 @@ class ClientsList extends Component{
             .catch((er) => console.log(er))
 
             //to send the message
+            /*
+               ch
+               this one should be run in a 1 periode interval, till the ch_arr array get empty
+
+            */
             axios.post(api_send_message, JSON.stringify(merge_obj))
             .then((res) =>{
                 console.log(res.data);
@@ -206,8 +203,8 @@ class ClientsList extends Component{
 
             //Check if the owner entered a message
             if(this.state.custom_mss === ""){
-             this.setState({ custom_mss: "We appreciate your business with us. please click here to rate us" }); 
-             custom_mss_to_use = "We appreciate your business with us. please click here to rate us";
+             this.setState({ custom_mss: default_message }); 
+             custom_mss_to_use = default_message;
               jsm = {
                 'share_url': share_url_to_use,
                 'custom_mss': custom_mss_to_use,
@@ -224,7 +221,7 @@ class ClientsList extends Component{
         }else{
 
             url_send_or_not_value = "NO";
-            postMss(jsm, obj_chck_checked);
+            postMss(jsm, obj_chck_checked); //obj_chck_checked {}
         }
         
         console.log(url_send_or_not_value);   

@@ -85,6 +85,7 @@ class ClientDetail extends Component {
 
       //Send updated customer info to API
       const update_url = "https://tchounangproject.com//April_2020/Omarketing/api/customers/updateCustInfo.php";
+      //const update_url = "http://localhost:8080/April_2020/Omarketing/api/customers/updateCustInfo.php";
       axios.put(update_url, jsonState)
       .then((res)=>{
         const response = res.data.message;
@@ -123,17 +124,44 @@ class ClientDetail extends Component {
 
     //delete the customer info
     Delete_cust = () => {
-      var del = document.getElementById("btnDelete").value;
+      //const delete_url = "http://localhost:8080/April_2020/Omarketing/api/customers/deleteCust.php";
+      const delete_url = "https://tchounangproject.com/April_2020/Omarketing/api/customers/deleteCust.php";
+      const del = document.getElementById("btnDelete").value;
       console.log(del);
+      const del_json = JSON.stringify({'id':del});
+      console.log(del_json);
+
+      axios.post(delete_url, del_json)
+      .then((res)=>{
+        const response = res.data.message;
+        if(response === "good"){
+          this.setState({response_mss: "Customer Info Deleted"});
+          
+          //display message only for 3 seconds
+          const display_update_mss = document.getElementById("p-mss-display");
+          display_update_mss.style.color = "green";
+          display_update_mss.style.transition = "1s ease";
+          display_update_mss.style.display = "block";
+          setTimeout(()=>{
+            display_update_mss.style.display = "none";
+          },1500);
+
+          //refresh the component
+          setTimeout(()=>{
+            this.props.history.push("/clientslist");
+          },1700)
+         }else{
+           this.setState({ response_mss: "Info not updated" });
+         }
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
     }
 
     render(){
-      //const { firstName } = this.state;
-     // const fn = this.state.cust_data_fr_api.firstName;
-     const { cust_data_fr_api:{ firstName, lastName, email, phoneNumber } } = this.state;
+     //const { cust_data_fr_api:{ firstName, lastName, email, phoneNumber } } = this.state;
      console.log(this.state.cust_data_fr_api.firstName);
-
-     //<input id="em" className="li-cust-detail" type="text" name="cust_data_fr_api" onChange={ this.Value_has_changed } value={ firstName } />
     return(
       <div className="animate-bottom">
         <div className="home-container">
