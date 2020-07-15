@@ -67,14 +67,13 @@ class ClientsList extends Component{
                         </ul>
                      </div>
         )); 
-        
+         
         return get_all_cust;
     }
 
     //Send Message
     sendMessage = (e)=>{
      e.preventDefault();
-     console.log("mami");
     
     const cust_list_api_url = "https://tchounangproject.com/April_2020/Omarketing/api/messages/message.php";
     const api_send_message =  "https://tchounangproject.com/April_2020/Omarketing/api/send-sms_update.php";
@@ -107,6 +106,7 @@ class ClientsList extends Component{
 
     //transform chk_checked array in a string
     let chck_checked_string = chck_checked.join("-"); // e.g "4,8998989-5,989898-1,89898989"
+                                                      // chck_checked = []
 
     //pass the string values to a javascript object   
     const obj_chck_checked = {
@@ -126,9 +126,9 @@ class ClientsList extends Component{
                 'custom_mss': custom_mss_to_use,
             } 
         }else if(this.state.share_url === "" && this.state.custom_mss !== ""){
-            this.setState({ share_url: "www.myBu.com" })
+            this.setState({ share_url: default_business_url })
 
-            share_url_to_use = "www.myBu.com";
+            share_url_to_use = default_business_url;
             jsm = {
                 'share_url': share_url_to_use,
                 'custom_mss': this.state.custom_mss,

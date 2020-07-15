@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 body{
     display:flex;
     justify-content: center;
@@ -334,13 +335,15 @@ input[type=checkbox]:checked:after {
   }
 
   @-webkit-keyframes animatebottom {
-    from { bottom:-500px; opacity:0 } 
-    to { bottom:0px; opacity:1 }
+    0% {  opacity:0 }
+    50% { opacity: 0.4} 
+    100% { opacity:1 }
   }
 
   @keyframes animatebottom { 
-    from{ bottom:-500px; opacity:0 } 
-    to{ bottom:0; opacity:1 }
+    0% {  opacity:0; width:0px; }
+    50% { opacity: 0.4; } 
+    100% { opacity:1; width: 400px;}
   }
 
 /*------------Mobile----------*/

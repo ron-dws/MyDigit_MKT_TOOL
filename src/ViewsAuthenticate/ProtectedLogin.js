@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-const ProtectedLogin = ({auth, component:Component, ...rest}) => {
+// I took out ...rest => Because Edge & IE browsers does not implement it yet
+const ProtectedLogin = ({auth, component:Component}) => {
     return(
       <Route 
-        {...rest}
         render = {() => auth? (<Redirect to="/vdashboard" />):(<Component />)} 
       />
     )

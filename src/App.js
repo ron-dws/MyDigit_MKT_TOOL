@@ -15,6 +15,7 @@ import ProtectedLogin from './ViewsAuthenticate/ProtectedLogin';
 import Vdashboard from './ViewsAuthenticate/Vdashboard';
 import Vauthenticate from './ViewsAuthenticate/Vauthenticate';
 import Cookies from 'js-cookie';
+import TestShow from './Views/TestShow';
 
 
 
@@ -44,6 +45,7 @@ const App = () => {
                   <Route path="/modal" component={Modal} />
                   <Route path="/clientslist" component={ClientsList} />
                   <Route path="/clientdetail/:value" component={ClientDetail} />
+                  <Route path="/testshow" component={ TestShow } />
                   {/* <Route path="/test/:value" component={TestUs} /> */}
                   <Route path="/test" component={TestUs} />
                   <Route path="/logout" component={Logout} />

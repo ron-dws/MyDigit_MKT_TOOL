@@ -97,6 +97,7 @@ class Login extends Component{
         }else{
         log_status = "no";
         }
+        
      return(
       <div className="animate-bottom">
         <div className="home-container">
